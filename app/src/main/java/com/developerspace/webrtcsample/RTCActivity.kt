@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -43,6 +45,7 @@ class RTCActivity : AppCompatActivity() {
 
     private var inSpeakerMode = true
 
+
     private val sdpObserver = object : AppSdpObserver() {
         override fun onCreateSuccess(p0: SessionDescription?) {
             super.onCreateSuccess(p0)
@@ -65,6 +68,9 @@ class RTCActivity : AppCompatActivity() {
             rtcClient.switchCamera()
         }
 
+
+        var audio_output_button = findViewById<ImageView>(R.id.audio_output_button)
+
         audio_output_button.setOnClickListener {
             if (inSpeakerMode) {
                 inSpeakerMode = false
@@ -76,6 +82,9 @@ class RTCActivity : AppCompatActivity() {
                 audioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.SPEAKER_PHONE)
             }
         }
+
+        var video_button = findViewById<ImageView>(R.id.video_button)
+
         video_button.setOnClickListener {
             if (isVideoPaused) {
                 isVideoPaused = false
@@ -86,6 +95,9 @@ class RTCActivity : AppCompatActivity() {
             }
             rtcClient.enableVideo(isVideoPaused)
         }
+
+        var mic_button = findViewById<ImageView>(R.id.mic_button)
+
         mic_button.setOnClickListener {
             if (isMute) {
                 isMute = false
@@ -96,6 +108,8 @@ class RTCActivity : AppCompatActivity() {
             }
             rtcClient.enableAudio(isMute)
         }
+
+        var end_call_button = findViewById<ImageView>(R.id.end_call_button)
         end_call_button.setOnClickListener {
             rtcClient.endCall(meetingID)
             remote_view.isGone = false

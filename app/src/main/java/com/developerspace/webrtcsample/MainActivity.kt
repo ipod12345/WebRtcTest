@@ -3,6 +3,8 @@ package com.developerspace.webrtcsample
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_start.*
@@ -11,9 +13,18 @@ class MainActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
 
+    lateinit var start_meeting : MaterialButton
+    lateinit var join_meeting : MaterialButton
+    lateinit var meeting_id : EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
+
+        start_meeting = findViewById(R.id.start_meeting)
+        join_meeting = findViewById(R.id.join_meeting)
+        meeting_id = findViewById(R.id.meeting_id)
+
         Constants.isIntiatedNow = true
         Constants.isCallEnded = true
         start_meeting.setOnClickListener {
